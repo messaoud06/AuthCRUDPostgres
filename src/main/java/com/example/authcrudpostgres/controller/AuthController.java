@@ -109,7 +109,7 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    LoginResponse login(@RequestBody User request ){
+    public LoginResponse login(@RequestBody User request ){
 
         try {
             Authentication authenticate = authenticationManager.authenticate(
