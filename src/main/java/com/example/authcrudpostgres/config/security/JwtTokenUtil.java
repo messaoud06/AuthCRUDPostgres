@@ -1,9 +1,8 @@
 package com.example.authcrudpostgres.config.security;
 
-import com.example.authcrudpostgres.entity.Role;
 import com.example.authcrudpostgres.entity.User;
 import com.example.authcrudpostgres.model.JwtValidationModel;
-import com.example.authcrudpostgres.model.Roles;
+import com.example.authcrudpostgres.enumuration.Roles;
 
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;

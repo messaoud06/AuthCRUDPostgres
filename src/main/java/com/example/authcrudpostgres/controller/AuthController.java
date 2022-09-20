@@ -9,22 +9,18 @@ import com.example.authcrudpostgres.exception.AuthenticationException;
 import com.example.authcrudpostgres.model.GenericResponse;
 import com.example.authcrudpostgres.model.LoginResponse;
 import com.example.authcrudpostgres.model.RegisterRequest;
-import com.example.authcrudpostgres.model.Roles;
+import com.example.authcrudpostgres.enumuration.Roles;
 import com.example.authcrudpostgres.repository.RoleRepository;
 import com.example.authcrudpostgres.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,6 +67,11 @@ public class AuthController {
         Set<String> requestRoles = registerRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
+        if(requestRoles == null || requestRoles.isEmpty()){
+            requestRoles = new HashSet<>();
+            requestRoles.add(Roles.ROLE_USER.toString());
+        }
+
         if (registerRequest == null){
             Role userRole = roleRepository.findByName(Roles.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -104,7 +105,7 @@ public class AuthController {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return new GenericResponse(0,"User registered successfully!");
+            return new GenericResponse(0,"User registered successfully!");
     }
 
 

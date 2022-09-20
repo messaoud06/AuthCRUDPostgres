@@ -1,6 +1,5 @@
 package com.example.authcrudpostgres.controller;
 
-import com.example.authcrudpostgres.entity.Role;
 import com.example.authcrudpostgres.entity.User;
 import com.example.authcrudpostgres.model.GenericResponse;
 import com.example.authcrudpostgres.repository.UserRepository;

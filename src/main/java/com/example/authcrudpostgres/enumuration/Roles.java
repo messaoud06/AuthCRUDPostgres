@@ -1,4 +1,4 @@
-package com.example.authcrudpostgres.model;
+package com.example.authcrudpostgres.enumuration;
 
 public enum Roles {
     ROLE_USER,
