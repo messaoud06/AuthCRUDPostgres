@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/admin/role")
@@ -27,6 +28,7 @@ public class AdminController {
     @GetMapping("/all")
     public ResponseEntity<List<Role>> getAll(){
         List<Role> roles =  roleRepository.findAll();
+        roles = roles.stream().filter(role -> role.getName().toString().startsWith("TE")).collect(Collectors.toList());
         return ResponseEntity.ok(roles);
     }
 
